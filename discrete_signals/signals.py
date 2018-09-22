@@ -22,20 +22,21 @@ class DiscreteSignal:
     start=attr.ib(type=Time)
     end=attr.ib(type=Time)
 
-    @property
     def values(self):
-        return list(self.data.values())
+        return self.data.values()
 
-    @property
     def times(self):
-        return list(self.data.keys())
+        return self.data.keys()
 
-    def __repr__(self):
-        return f"start, end: [{self.start}, {self.end})\n" \
-            f"data: {[(t, dict(val)) for t, val in self.data.items()]}"
+    def items(self):
+        return self.data.items()
 
     def evolve(self, **kwargs):
         return attr.evolve(self, **kwargs)
+
+    def __repr__(self):
+        return f"start, end: [{self.start}, {self.end})\n" \
+            f"data: {[(t, dict(val)) for t, val in self.items()]}"
     
     def __rshift__(self, delta):
         return self.evolve(
@@ -79,7 +80,7 @@ class DiscreteSignal:
 
         def apply_window(time_val):
             t, _ = time_val
-            values = self[start + t: end + t].data.values()
+            values = self[start + t: end + t].values()
             # Note: {} forces application of tuple.
             values = fn.merge_with(tuple, {}, *values)
             return (t, values)
@@ -88,6 +89,10 @@ class DiscreteSignal:
             data=fn.walk(apply_window, self.data),
             end=self.end - end
         )
+
+    def map(self, func, tag=None):
+        data = fn.walk_values(func, list(self.items()))
+        return signal(data, self.start, self.end, tag)
 
 
 def signal(data, start, end, tag=None):
