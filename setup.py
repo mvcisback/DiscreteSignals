@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name='discrete-signals',
-    version='0.0.1',
+    version='0.2.0',
     description='TODO',
     url='http://github.com/mvcisback/DiscreteSignals',
     author='Marcell Vazquez-Chanlatte',
