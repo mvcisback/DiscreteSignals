@@ -111,11 +111,12 @@ class DiscreteSignal:
 
         return self.evolve(data=fn.walk_values(_retag, self.data))
 
-    def interp(self, t):
+    def interp(self, t, tag=None):
+        # TODO: return function that interpolates the whole signal.
         assert self.start <= t < self.end
-        assert len(self.tags) == 1  # TODO: remove this constraint.
-        key = self.data.iloc[self.data.bisect_right(t) - 1]
-        return self[key]
+        sig = self.project({tag})
+        key = sig.data.iloc[sig.data.bisect_right(t) - 1]
+        return sig[key][tag]
 
     def project(self, keys):
         return self.transform(lambda v: fn.project(v, keys)) \

@@ -91,7 +91,7 @@ def test_rolling():
 def test_interp():
     sig1 = signal(DATA1, start=0, end=4, tag='x')
     for i in range(3):
-        assert sig1[0] == sig1.interp(i/3)
+        assert sig1[0]['x'] == sig1.interp(i/3, 'x')
 
 
 def test_filter():
