@@ -31,6 +31,10 @@ class DiscreteSignal:
     def items(self):
         return self.data.items()
 
+    @property
+    def tags(self):
+        return set(fn.cat(self.values()))
+
     def evolve(self, **kwargs):
         return attr.evolve(self, **kwargs)
 
@@ -93,6 +97,12 @@ class DiscreteSignal:
     def map(self, func, tag=None):
         data = fn.walk_values(func, list(self.items()))
         return signal(data, self.start, self.end, tag)
+
+    def retag(self, mapping):
+        def _retag(val):
+            return fn.walk_keys(lambda k: mapping.get(k, k), val)
+
+        return self.evolve(data=fn.walk_values(_retag, self.data))
 
 
 def signal(data, start, end, tag=None):
