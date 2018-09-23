@@ -109,6 +109,21 @@ print(x.map(lambda val: str(val['x']), tag='z'))
 # data: [(0, {'z': '1'}), (1, {'z': '2'}), (2, {'z': '3'})]
 ```
 
+
+## Piecewise Constant Interpolation
+
+```python
+print(x.interp(0))
+# {'x': 1}
+
+print(x.interp(0.1))
+# {'x': 1}
+
+print(x.interp(1))
+# {'x': 2}
+```
+
+
 ## Attributes
 ```python
 print((x | y).tags)
