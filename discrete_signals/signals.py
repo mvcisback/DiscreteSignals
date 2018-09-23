@@ -113,6 +113,7 @@ class DiscreteSignal:
 
     def interp(self, t):
         assert self.start <= t < self.end
+        assert len(self.tags) == 1  # TODO: remove this constraint.
         key = self.data.iloc[self.data.bisect_right(t) - 1]
         return self[key]
 
