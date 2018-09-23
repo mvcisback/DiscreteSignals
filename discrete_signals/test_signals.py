@@ -86,3 +86,9 @@ def test_rolling():
     sig5 = sig1.rolling(-1.1, 1.1)
     assert {v['x'] for v in sig1.values()} == set(sig5[1.1]['x'])
     assert {v['x'] for v in sig1[2:].values()} == set(sig5[3.1]['x'])
+
+
+def test_interp():
+    sig1 = signal(DATA1, start=0, end=4, tag='x')
+    for i in range(3):
+        assert sig1[0] == sig1.interp(i/3)

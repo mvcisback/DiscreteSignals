@@ -102,6 +102,11 @@ class DiscreteSignal:
 
         return self.evolve(data=fn.walk_values(_retag, self.data))
 
+    def interp(self, t):
+        assert self.start <= t < self.end
+        key = self.data.iloc[self.data.bisect_right(t) - 1]
+        return self[key]
+
 
 def signal(data, start, end, tag=None):
     data = map(lambda x: (x[0], defaultdict(None, {tag: x[1]})), data)

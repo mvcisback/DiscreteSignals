@@ -1,10 +1,9 @@
 <figure>
   <img src="assets/logo_text.svg" alt="py-aiger logo" width=300px>
   <figcaption>
-      pyAiger: A python library for manipulating sequential and
-      combinatorial circuits.
+    A domain specific language for modeling and manipulating discrete
+    time signals.
   </figcaption>
-
 </figure>
 
 [![Build Status](https://travis-ci.org/mvcisback/DiscreteSignals.svg?branch=master)](https://travis-ci.org/mvcisback/DiscreteSignals)
