@@ -1,3 +1,12 @@
+<figure>
+  <img src="assets/logo_text.svg" alt="py-aiger logo" width=300px>
+  <figcaption>
+      pyAiger: A python library for manipulating sequential and
+      combinatorial circuits.
+  </figcaption>
+
+</figure>
+
 [![Build Status](https://travis-ci.org/mvcisback/DiscreteSignals.svg?branch=master)](https://travis-ci.org/mvcisback/DiscreteSignals)
 [![codecov](https://codecov.io/gh/mvcisback/DiscreteSignals/branch/master/graph/badge.svg)](https://codecov.io/gh/mvcisback/DiscreteSignals)
 
