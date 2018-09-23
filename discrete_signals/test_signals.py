@@ -17,6 +17,12 @@ def test_make_signal():
     assert set(fn.pluck(1, DATA1)) == {v['x'] for v in sig1.values()}
 
 
+def test_repr():
+    out = repr(signal(DATA1, start=0, end=4, tag='x'))
+    assert out == "start, end: [0, 4)\n" \
+        "data: [(0, {'x': 1}), (1, {'x': 1.1}), (2, {'x': 3})]"
+
+
 def test_slice():
     sig1 = signal(DATA1, start=0, end=4, tag='x')
     sig2 = sig1[-float('inf'):float('inf')][0:4]

@@ -9,10 +9,6 @@ from sortedcontainers import SortedDict
 Time, Value = TypeVar('Time'), TypeVar('Value')
 
 
-def _name_converter(names):
-    return names if isinstance(names, frozenset) else frozenset({names})
-
-
 @attr.s(slots=True, repr=False)
 class DiscreteSignal:
     data = attr.ib(
