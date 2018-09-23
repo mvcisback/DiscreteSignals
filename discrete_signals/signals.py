@@ -92,9 +92,18 @@ class DiscreteSignal:
             end=self.end - end
         )
 
+    def transform(self, func):
+        data = fn.walk_values(func, list(self.items()))
+        return self.evolve(data=data)
+
     def map(self, func, tag=None):
         data = fn.walk_values(func, list(self.items()))
         return signal(data, self.start, self.end, tag)
+
+    def filter(self, pred):
+        return self.evolve(
+            data=fn.select_values(pred, self.data)
+        )
 
     def retag(self, mapping):
         def _retag(val):
@@ -106,6 +115,10 @@ class DiscreteSignal:
         assert self.start <= t < self.end
         key = self.data.iloc[self.data.bisect_right(t) - 1]
         return self[key]
+
+    def project(self, keys):
+        return self.transform(lambda v: fn.project(v, keys)) \
+                   .filter(lambda v: v.keys() & set(keys))
 
 
 def signal(data, start, end, tag=None):

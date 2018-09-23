@@ -92,3 +92,23 @@ def test_interp():
     sig1 = signal(DATA1, start=0, end=4, tag='x')
     for i in range(3):
         assert sig1[0] == sig1.interp(i/3)
+
+
+def test_filter():
+    sig1 = signal(DATA1, start=0, end=4, tag='x')
+    sig2 = sig1.filter(lambda v: v['x'] > 2)
+    assert len(sig2.items()) == 1
+    assert sig2[2]['x'] == 3
+
+
+def test_project():
+    sig1 = signal(DATA1, start=0, end=4, tag='x')
+    sig2 = signal(DATA1, start=0, end=4, tag='y')
+    assert (sig1 | sig2).project('x') == sig1
+
+
+def test_transform():
+    sig1 = signal(DATA1, start=0, end=4, tag='x')
+    assert sig1.transform(lambda v: v) == sig1
+    assert sig1.transform(lambda v: {'y': v['x']}) \
+        == sig1.retag({'x': 'y'})

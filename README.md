@@ -103,6 +103,28 @@ print(x.rolling(1, 3))
 
 ## Mapping a Function
 
+One perform a point wise transform of the signal. For example, the
+following is equivalent to retagging the signal and adding 1.
+
+
+```python
+print(x.transform(lambda val: {'y': val['x'] + 1}))
+# start, end: [0, 10)
+# data: [(0, {'y': 2}), (1, {'y': 3}), (2, {'y': 4})]
+```
+
+Alternatively, `DiscreteSignal`s support mapping the dictionary of values to a single value (and optionally tag it):
+
+```python
+print(x.map(lambda val: str(val['x']), tag='z'))
+# start, end: [0, 10)
+# data: [(0, {'z': '1'}), (1, {'z': '2'}), (2, {'z': '3'})]
+```
+
+
+
+## Mapping a Function
+
 ```python
 print(x.map(lambda val: str(val['x']), tag='z'))
 # start, end: [0, 10)
