@@ -36,11 +36,11 @@ from discrete_signals import signal
 x = signal([(0, 1), (1, 2), (2, 3)], start=0, end=10, tag='x')
 y = signal([(0.5, 'a'), (1, 'b'), (2, 'c')], start=0, end=3, tag='y')
 
-print(x)
+x
 # start, end: [0, 10)
 # data: [(0, {'x': 1}), (1, {'x': 2}), (2, {'x': 3})]
 
-print(y)
+y
 # start, end: [0, 3)
 # data: [(0.5, {'y': 'a'}), (1, {'y': 'b'}), (2, {'y': 'c'})]
 ```
@@ -48,7 +48,7 @@ print(y)
 ## Parallel Composition
 
 ```python
-print(x | y)
+x | y
 # start, end: [0, 10)
 # data: [(0, {'x': 1}), (0.5, {'y': 'a'}), (1, {'x': 2, 'y': 'b'}), (2, {'x': 3, 'y': 'c'})]
 ```
@@ -56,7 +56,7 @@ print(x | y)
 ## Concatenation
 
 ```python
-print(x @ y)
+x @ y
 # start, end: [0, 13)
 # data: [(0, {'x': 1}), (1, {'x': 2}), (2, {'x': 3}), (10.5, {'y': 'a'}), (11, {'y': 'b'}), (12, {'y': 'c'})]
 ```
@@ -64,7 +64,7 @@ print(x @ y)
 ## Retagging/Relabeling
 
 ```python
-print(x.retag({'x': 'z'}))
+x.retag({'x': 'z'})
 # start, end: [0, 10)
 # data: [(0, {'z': 1}), (1, {'z': 2}), (2, {'z': 3})]
 ```
@@ -72,11 +72,11 @@ print(x.retag({'x': 'z'}))
 ## Time shifting
 
 ```python
-print(x >> 1.1)
+x >> 1.1
 # start, end: [1.1, 11.1)
 # data: [(1.1, {'x': 1}), (2.1, {'x': 2}), (3.1, {'x': 3})]
 
-print(x << 1)
+x << 1
 # start, end: [-1, 9)
 # data: [(-1, {'x': 1}), (0, {'x': 2}), (1, {'x': 3})]
 ```
@@ -84,11 +84,11 @@ print(x << 1)
 ## Slicing
 
 ```python
-print(x[1:])
+x[1:]
 # start, end: [1, 10)
 # data: [(1, {'x': 2}), (2, {'x': 3})]
 
-print(x[:1])
+x[:1]
 # start, end: [0, 1)
 # data: [(0, {'x': 1})]
 ```
@@ -96,7 +96,7 @@ print(x[:1])
 ## Rolling Window
 
 ```python
-print(x.rolling(1, 3))
+x.rolling(1, 3)
 # start, end: [-1, 7)
 # data: [(-1, {'x': (1, 2)}), (0, {'x': (2, 3)}), (1, {'x': (3,)})]
 ```
@@ -108,7 +108,7 @@ following is equivalent to retagging the signal and adding 1.
 
 
 ```python
-print(x.transform(lambda val: {'y': val['x'] + 1}))
+x.transform(lambda val: {'y': val['x'] + 1})
 # start, end: [0, 10)
 # data: [(0, {'y': 2}), (1, {'y': 3}), (2, {'y': 4})]
 ```
@@ -116,44 +116,50 @@ print(x.transform(lambda val: {'y': val['x'] + 1}))
 Alternatively, `DiscreteSignal`s support mapping the dictionary of values to a single value (and optionally tag it):
 
 ```python
-print(x.map(lambda val: str(val['x']), tag='z'))
+x.map(lambda val: str(val['x']), tag='z')
 # start, end: [0, 10)
 # data: [(0, {'z': '1'}), (1, {'z': '2'}), (2, {'z': '3'})]
 ```
 
-
-
-## Mapping a Function
+## Filter a signal
 
 ```python
-print(x.map(lambda val: str(val['x']), tag='z'))
+x.filter(lambda val: val['x'] > 2)
 # start, end: [0, 10)
-# data: [(0, {'z': '1'}), (1, {'z': '2'}), (2, {'z': '3'})]
+# data: [(2, {'x': 3})]
+```
+
+## Projecting onto a subset of the tags.
+
+```python
+# (x | y).project({'x'})
+# start, end: [0, 10)
+# data: [(0, {'x': 1}), (1, {'x': 2}), (2, {'x': 3})]
 ```
 
 
 ## Piecewise Constant Interpolation
 
 ```python
-print(x.interp(0))
+x.interp(0)
 # {'x': 1}
 
-print(x.interp(0.1))
+x.interp(0.1)
 # {'x': 1}
 
-print(x.interp(1))
+x.interp(1)
 # {'x': 2}
 ```
 
 
 ## Attributes
 ```python
-print((x | y).tags)
+(x | y).tags
 # {'x', 'y'}
 
-print(x.values())
+x.values()
 # SortedDict_values([defaultdict(None, {'x': 1}), defaultdict(None, {'x': 2}), defaultdict(None, {'x': 3})])
 
-print(list(x.times()))
+list(x.times())
 # [0, 1, 2]
 ```
