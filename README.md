@@ -141,14 +141,14 @@ x.filter(lambda val: val['x'] > 2)
 ## Piecewise Constant Interpolation
 
 ```python
-x.interp(0)
-# {'x': 1}
+x.interp(0, tag='x')
+# 1
 
-x.interp(0.1)
-# {'x': 1}
+x.interp(0.1, tag='x')
+# 1
 
-x.interp(1)
-# {'x': 2}
+x.interp(1, tag='x')
+# 2
 ```
 
 
