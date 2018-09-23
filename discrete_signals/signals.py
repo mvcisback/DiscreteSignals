@@ -1,5 +1,5 @@
 from collections import defaultdict
-from typing import DefaultDict, FrozenSet, Mapping, TypeVar, Union
+from typing import DefaultDict, Mapping, TypeVar
 
 import attr
 import funcy as fn
@@ -15,12 +15,12 @@ def _name_converter(names):
 
 @attr.s(slots=True, repr=False)
 class DiscreteSignal:
-    data=attr.ib(
+    data = attr.ib(
         converter=SortedDict,
         type=Mapping[Time, DefaultDict[str, Value]]
     )
-    start=attr.ib(type=Time)
-    end=attr.ib(type=Time)
+    start = attr.ib(type=Time)
+    end = attr.ib(type=Time)
 
     def values(self):
         return self.data.values()
@@ -41,7 +41,7 @@ class DiscreteSignal:
     def __repr__(self):
         return f"start, end: [{self.start}, {self.end})\n" \
             f"data: {[(t, dict(val)) for t, val in self.items()]}"
-    
+
     def __rshift__(self, delta):
         return self.evolve(
             data=fn.walk_keys(lambda t: t + delta, self.data),
@@ -55,7 +55,7 @@ class DiscreteSignal:
     def __matmul__(self, other):
         return self.evolve(
             data=fn.merge(
-                self.data, 
+                self.data,
                 fn.walk_keys(lambda t: t + self.end, other.data)
             ),
             end=self.end + (other.end - other.start)
@@ -73,7 +73,7 @@ class DiscreteSignal:
             assert key.step is None
             start = self.start if key.start is None else key.start
             end = self.end if key.stop is None else key.stop
-            
+
             return self.evolve(
                 data=fn.select_keys(lambda t: start <= t < end, self.data),
                 start=start, end=end,
@@ -90,7 +90,7 @@ class DiscreteSignal:
             # Note: {} forces application of tuple.
             values = fn.merge_with(tuple, {}, *values)
             return (t, values)
-        
+
         return self.evolve(
             data=fn.walk(apply_window, self.data),
             end=self.end - end

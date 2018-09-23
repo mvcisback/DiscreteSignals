@@ -5,6 +5,7 @@ from discrete_signals import signal
 
 DATA1 = [(0, 1), (1, 1.1), (2, 3)]
 
+
 def test_make_signal():
     sig1 = signal(DATA1, start=0, end=4, tag='x')
     sig2 = signal(DATA1, start=1, end=2, tag='x')
@@ -79,4 +80,3 @@ def test_rolling():
     sig5 = sig1.rolling(-1.1, 1.1)
     assert {v['x'] for v in sig1.values()} == set(sig5[1.1]['x'])
     assert {v['x'] for v in sig1[2:].values()} == set(sig5[3.1]['x'])
-
