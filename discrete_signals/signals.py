@@ -71,7 +71,9 @@ class DiscreteSignal:
     def __getitem__(self, key):
         if isinstance(key, slice):
             assert key.step is None
-            start, end = key.start, key.stop
+            start = self.start if key.start is None else key.start
+            end = self.end if key.stop is None else key.stop
+            
             return self.evolve(
                 data=fn.select_keys(lambda t: start <= t < end, self.data),
                 start=start, end=end,

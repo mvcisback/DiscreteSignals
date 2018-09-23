@@ -63,3 +63,20 @@ def test_retag():
     assert sig2.tags == {'y'}
 
     assert sig2.retag({'y': 'x'}) == sig1
+
+
+def test_rolling():
+    sig1 = signal(DATA1, start=0, end=4, tag='x')
+    sig2 = sig1.rolling(0, 3)
+    assert {v['x'] for v in sig1.values()} == set(sig2[0]['x'])
+
+    sig3 = sig1.rolling(0, 2)
+    assert {v['x'] for v in sig1[:2].values()} == set(sig3[0]['x'])
+
+    sig4 = sig1.rolling(0, 1)
+    assert {v['x'] for v in sig1[:1].values()} == set(sig4[0]['x'])
+
+    sig5 = sig1.rolling(-1.1, 1.1)
+    assert {v['x'] for v in sig1.values()} == set(sig5[1.1]['x'])
+    assert {v['x'] for v in sig1[2:].values()} == set(sig5[3.1]['x'])
+
