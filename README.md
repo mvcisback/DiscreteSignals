@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/mvcisback/DiscreteSignals.svg?branch=master)](https://travis-ci.org/mvcisback/DiscreteSignals)
-[![codecov](https://codecov.io/gh/mvcisback/discrete-signals/branch/master/graph/badge.svg)](https://codecov.io/gh/mvcisback/discrete-signals)
+[![codecov](https://codecov.io/gh/mvcisback/DiscreteSignals/branch/master/graph/badge.svg)](https://codecov.io/gh/mvcisback/DiscreteSignals)
 
 
 [![PyPI version](https://badge.fury.io/py/discrete-signals.svg)](https://badge.fury.io/py/discrete-signals)
