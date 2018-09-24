@@ -77,6 +77,8 @@ class DiscreteSignal:
         return self.data[key]
 
     def rolling(self, start, end):
+        assert not (end == self.end == float('inf'))
+
         if start != 0:
             return self.rolling(0, end-start) << start
 
@@ -89,7 +91,7 @@ class DiscreteSignal:
 
         return self.evolve(
             data=fn.walk(apply_window, self.data),
-            end=self.end - end
+            end=self.end - end if end < self.end else self.end
         )
 
     def transform(self, func):
