@@ -132,7 +132,7 @@ x.filter(lambda val: val['x'] > 2)
 ## Projecting onto a subset of the tags.
 
 ```python
-# (x | y).project({'x'})
+(x | y).project({'x'})
 # start, end: [0, 10)
 # data: [(0, {'x': 1}), (1, {'x': 2}), (2, {'x': 3})]
 ```
