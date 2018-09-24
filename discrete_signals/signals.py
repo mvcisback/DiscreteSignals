@@ -77,9 +77,8 @@ class DiscreteSignal:
         return self.data[key]
 
     def rolling(self, start, end):
-        assert not (end == self.end == float('inf'))
-
         if start != 0:
+            delta = end - start if end != float('inf') else end
             return self.rolling(0, end-start) << start
 
         def apply_window(time_val):

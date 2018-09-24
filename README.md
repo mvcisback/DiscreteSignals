@@ -137,7 +137,6 @@ x.filter(lambda val: val['x'] > 2)
 # data: [(0, {'x': 1}), (1, {'x': 2}), (2, {'x': 3})]
 ```
 
-
 ## Attributes
 ```python
 (x | y).tags
