@@ -101,22 +101,13 @@ class DiscreteSignal:
         return signal(data, self.start, self.end, tag)
 
     def filter(self, pred):
-        return self.evolve(
-            data=fn.select_values(pred, self.data)
-        )
+        return self.evolve(data=fn.select_values(pred, self.data))
 
     def retag(self, mapping):
         def _retag(val):
             return fn.walk_keys(lambda k: mapping.get(k, k), val)
 
-        return self.evolve(data=fn.walk_values(_retag, self.data))
-
-    def interp(self, t, tag=None):
-        # TODO: return function that interpolates the whole signal.
-        assert self.start <= t < self.end
-        sig = self.project({tag})
-        key = sig.data.iloc[sig.data.bisect_right(t) - 1]
-        return sig[key][tag]
+        return self.transform(_retag)
 
     def project(self, keys):
         return self.transform(lambda v: fn.project(v, keys)) \
