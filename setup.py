@@ -4,7 +4,7 @@ DESC = 'A domain specific language for modeling and manipulating discrete time s
 
 setup(
     name='discrete-signals',
-    version='0.7.0',
+    version='0.7.1',
     description=DESC,
     url='http://github.com/mvcisback/DiscreteSignals',
     author='Marcell Vazquez-Chanlatte',

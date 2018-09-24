@@ -79,7 +79,7 @@ class DiscreteSignal:
     def rolling(self, start, end):
         if start != 0:
             delta = end - start if end != float('inf') else end
-            return self.rolling(0, end-start) << start
+            return self.rolling(0, delta) << start
 
         def apply_window(time_val):
             t, _ = time_val
@@ -116,5 +116,5 @@ class DiscreteSignal:
 
 
 def signal(data, start, end, tag=None):
-    data = map(lambda x: (x[0], defaultdict(None, {tag: x[1]})), data)
+    data = map(lambda x: (x[0], defaultdict(lambda: None, {tag: x[1]})), data)
     return DiscreteSignal(data=data, start=start, end=end)[start:end]
