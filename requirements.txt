@@ -1,4 +1,4 @@
-attrs==18.2.0
+attrs==19.2.0
 codecov==2.0.15
 funcy==1.11
 sortedcontainers==2.1.0
