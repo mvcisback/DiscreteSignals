@@ -1,6 +1,6 @@
 attrs==19.3.0
 codecov==2.0.15
-funcy==1.11
+funcy==1.14
 sortedcontainers==2.1.0
 pytest==3.2.3 # pyup: ignore
 pytest-cov==2.5.1 # pyup: ignore
