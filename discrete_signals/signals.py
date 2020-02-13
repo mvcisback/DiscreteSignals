@@ -115,6 +115,6 @@ class DiscreteSignal:
                    .filter(lambda v: v.keys() & set(keys))
 
 
-def signal(data, start, end, tag=None):
+def signal(data, start=0, end=float('inf'), tag=None):
     data = map(lambda x: (x[0], defaultdict(lambda: None, {tag: x[1]})), data)
     return DiscreteSignal(data=data, start=start, end=end)[start:end]
