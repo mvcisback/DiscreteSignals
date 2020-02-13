@@ -1,9 +1,15 @@
 [tool.poetry]
 name = "discrete-signals"
+readme="README.md"
 version = "0.8.0"
 description = "A domain specific language for modeling and manipulating discrete time signals."
+repository = "https://github.com/mvcisback/DiscreteSignals"
 authors = ["Marcell Vazquez-Chanlatte <mvc@linux.com>"]
 license = "MIT"
+packages = [
+    { include = "discrete_signals" },
+]
+
 
 [tool.poetry.dependencies]
 python = "^3.7"
@@ -12,6 +18,11 @@ funcy = "^1.14"
 sortedcontainers = "^2.1.0"
 
 [tool.poetry.dev-dependencies]
+pytest = "^5.3.5"
+codecov = "^2.0.15"
+pytest-flake8 = "^1.0.4"
+pytest-sugar = "^0.9.2"
+pytest-xdist = "^1.31.0"
 
 
 [build-system]
