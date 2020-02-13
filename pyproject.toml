@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "discrete-signals"
-version = "0.7.3"
+version = "0.8.0"
 description = "A domain specific language for modeling and manipulating discrete time signals."
 authors = ["Marcell Vazquez-Chanlatte <mvc@linux.com>"]
 license = "MIT"
