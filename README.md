@@ -6,7 +6,8 @@
   </figcaption>
 </figure>
 
-[![Build Status](https://travis-ci.org/mvcisback/DiscreteSignals.svg?branch=master)](https://travis-ci.org/mvcisback/DiscreteSignals)
+
+[![Build Status](https://cloud.drone.io/api/badges/mvcisback/DiscreteSignals/status.svg)](https://cloud.drone.io/mvcisback/DiscreteSignals)
 [![codecov](https://codecov.io/gh/mvcisback/DiscreteSignals/branch/master/graph/badge.svg)](https://codecov.io/gh/mvcisback/DiscreteSignals)
 [![Updates](https://pyup.io/repos/github/mvcisback/DiscreteSignals/shield.svg)](https://pyup.io/repos/github/mvcisback/DiscreteSignals/)
 
