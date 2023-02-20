@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "discrete-signals"
 readme="README.md"
-version = "0.8.2"
+version = "0.8.3"
 description = "A domain specific language for modeling and manipulating discrete time signals."
 repository = "https://github.com/mvcisback/DiscreteSignals"
 authors = ["Marcell Vazquez-Chanlatte <mvc@linux.com>"]
@@ -13,7 +13,7 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.7"
-attrs = "^19.3.0"
+attrs = "^22"
 funcy = "^1.14"
 sortedcontainers = "^2.1.0"
 
